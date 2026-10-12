@@ -65,56 +65,89 @@
 }
 @media(max-width:350px){.brand{width:150px}.lecturer-copy{padding:20px}.image-tools .button{font-size:13px;padding-inline:10px}}
 
-/* Five levels retain the lecturer's bottom-tangent nested model. Text stays
-   real HTML and does not shrink as a raster/SVG label on narrow phones. */
-.lecturer-card{grid-template-columns:minmax(0,.72fr) minmax(0,1.8fr)}
-.lecturer-image{position:relative;min-height:0;overflow:hidden}
-.lecturer-image img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:62% center}
-.lecturer-copy{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:0 22px;padding:28px}
-.lecturer-profile{min-width:0;align-self:center}
-.lecturer-copy h3{font-size:32px}
-.lecturer-roles{font-size:15px;margin-top:18px}
-.lecturer-intro{font-size:15px;margin-top:20px}
-.lecturer-stats{grid-column:1 / -1}
-.productivity-model{margin:0;width:100%;max-width:350px;justify-self:center;align-self:center}
-.productivity-model figcaption{text-align:center;font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px}
-.model-rings{position:relative;isolation:isolate;list-style:none;padding:0;margin:0;width:100%;aspect-ratio:1 / 1.12}
-.model-level{position:absolute;bottom:0;left:50%;transform:translateX(-50%);border:1.5px solid #35c6ff99;border-radius:50%;text-align:center;background:linear-gradient(180deg,#07364c88,#05203122)}
-.model-level>div{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:max-content;max-width:100%}
-.model-level strong{display:block;color:var(--text);font-size:15px;line-height:1.5;white-space:nowrap;font-weight:600}
-.model-level span{display:block;font-size:10px;line-height:1.6;color:var(--muted);white-space:nowrap}
-.level-1{width:32%;height:25%;z-index:5;border-color:var(--accent);background:#06354a}
-.level-2{width:49%;height:44%;z-index:4}
-.level-3{width:66%;height:63%;z-index:3}
-.level-4{width:83%;height:82%;z-index:2}
-.level-5{width:100%;height:100%;z-index:1;border-color:#35c6ffcc}
+/* The identity lives on the real photograph. A scrim, not baked-in text,
+   keeps the portrait readable and lets the copy reflow on small phones. */
+.hero-arrival-note{font-size:13px;line-height:1.8;margin-top:18px;padding-left:12px;border-left:2px solid var(--accent)}
+.hero-arrival-note>span{color:var(--accent);font-weight:600;margin-right:10px}
+.hero-arrival-note strong{font-weight:500;color:var(--text)}
+.lecturer-card{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:stretch}
+.lecturer-image{position:relative;display:grid;align-items:end;min-height:660px;overflow:hidden;isolation:isolate;background:#02131f}
+.lecturer-image img{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;object-position:63% center;z-index:-2}
+.lecturer-image::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#010e1700 28%,#010e1740 42%,#010e17e8 66%,#010e17f5 100%)}
+.lecturer-profile{min-width:0;position:relative;align-self:end;padding:280px 36px 36px}
+.lecturer-profile .eyebrow{font-size:11px;letter-spacing:.2em;color:#8de0ff;margin-bottom:8px}
+.lecturer-profile h3{font-size:40px;letter-spacing:.04em;text-shadow:0 2px 14px #0009}
+.lecturer-roles{font-size:15px;line-height:1.9;color:#8de0ff;margin:16px 0 0}
+.lecturer-intro{font-size:15px;line-height:1.9;color:var(--text);margin-top:20px;padding-top:18px;border-top:1px solid #85dfff40;text-shadow:0 1px 6px #0008}
+.lecturer-copy{display:flex;flex-direction:column;justify-content:center;gap:28px;padding:32px;background:radial-gradient(ellipse at 50% 45%,#0b425433,transparent 65%),var(--section)}
+.productivity-model{margin:0;width:100%;max-width:380px;align-self:center}
+.productivity-model figcaption{text-align:center;font-size:18px;font-weight:600;color:var(--text);letter-spacing:.03em;margin-bottom:20px}
+/* Five nested curved shells share a growth origin. Opaque layers, reflective
+   rims and a low elliptical foundation create depth without animation. */
+.model-stage{position:relative;padding:0 12px 18px}
+.model-rings{position:relative;isolation:isolate;list-style:none;padding:0;margin:0;width:100%;aspect-ratio:1 / 1.16}
+.model-level{position:absolute;bottom:0;left:50%;transform:translateX(-50%);border:1px solid #75e1ff85;border-radius:50%;text-align:center;background:radial-gradient(ellipse at 24% 22%,#307c904d 0,transparent 42%),linear-gradient(115deg,#155268 0%,#0b2d40 45%,#03141f 84%);box-shadow:inset 3px 3px 6px #b2f6ff38,inset -7px -2px 14px #0007,0 -3px 12px #0007;overflow:hidden}
+.model-level::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,#c7f8ffbb 0%,#4ac5e800 28%,#040f1b00 65%,#46ceff88 100%);padding:2px;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none}
+.model-level::after{content:"";position:absolute;inset:5px 7px 6px 6px;border-radius:inherit;border-left:1px solid #b8f4ff30;border-top:1px solid #b8f4ff18;pointer-events:none}
+.model-level>div{position:absolute;left:50%;top:4%;transform:translateX(-50%);width:max-content;max-width:100%;z-index:1;text-shadow:0 2px 5px #00101ce6}
+.model-level strong{display:block;color:var(--text);font-size:18px;line-height:1.5;white-space:nowrap;font-weight:600}
+.model-level span{display:block;font-size:12px;line-height:1.65;color:#c3dfeb;white-space:nowrap}
+.level-1{width:32%;height:24%;z-index:5;border-color:#9aefff;background:radial-gradient(ellipse at 32% 16%,#5fc7da80,transparent 58%),linear-gradient(130deg,#166785,#07334c 65%,#031b2a);box-shadow:inset 3px 3px 10px #b8f5ff60,inset -5px -3px 12px #00101c,0 0 18px #35c6ff30,0 -3px 14px #0007}
+.level-2{width:49%;height:43%;z-index:4}
+.level-3{width:66%;height:62%;z-index:3}
+.level-4{width:83%;height:81%;z-index:2}
+.level-5{width:100%;height:100%;z-index:1;border-color:#91e9ffa6}
 .level-1>div{top:50%;transform:translate(-50%,-50%)}
-.level-1 strong{font-size:12px}
-.model-caption{text-align:center;font-size:11px;margin-top:12px}
+.level-1 strong{font-size:15px}
+.model-foundation{position:absolute;left:6%;right:6%;height:30px;bottom:4px;border:1px solid #5ddcff4d;border-radius:50%;background:radial-gradient(ellipse,#71e9ff50 0%,#35c6ff18 30%,#05203100 68%);box-shadow:0 7px 12px #0006,inset 0 -4px 5px #03131c}
+.model-foundation::after{content:"";position:absolute;inset:8px 26%;border-radius:50%;background:#8beaff50;filter:blur(5px)}
+.model-growth{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.model-caption{text-align:center;font-size:13px;line-height:1.8;color:#8de0ff;margin-top:10px;letter-spacing:.05em}
+.model-caption span{display:block;color:var(--muted);font-size:12px;letter-spacing:0}
+.lecturer-validation{padding-top:20px;border-top:1px solid #85dfff30}
+.validation-label{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.14em;color:#8de0ff;margin-bottom:15px}
+.validation-label::before{content:"";width:18px;height:1px;background:#8de0ff}
+.lecturer-stats{margin-top:0;padding-top:0;border-top:0;gap:12px}
+.lecturer-stats strong{font-size:32px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.lecturer-stats span{font-size:12px;white-space:nowrap}
 .room-heading{flex-wrap:wrap;gap:6px 14px}
 .room-regular{color:var(--muted);font-size:13px;white-space:nowrap}
 .room-price .breakfast{font-size:12px;white-space:nowrap;align-self:center;margin-left:2px}
 @media(min-width:641px){.hero-actions .button{min-width:0;padding-inline:22px}}
-@media(min-width:801px) and (max-width:1100px){
-  .lecturer-card{grid-template-columns:240px minmax(0,1fr)}
-  .lecturer-copy{grid-template-columns:1fr;padding:28px}
-  .productivity-model{margin-top:28px;max-width:320px}
-}
+@media(min-width:801px) and (max-width:1100px){.lecturer-copy{padding:24px}.lecturer-profile{padding-inline:28px}.model-level strong{font-size:16px}.level-1 strong{font-size:13px}.model-level span{font-size:11px}}
 @media(max-width:800px){
   .lecturer-card{grid-template-columns:1fr}
-  .lecturer-image img{position:static;height:auto;object-fit:contain}
-  .lecturer-copy{grid-template-columns:minmax(0,1fr) 290px;padding:28px}
+  .lecturer-image{min-height:640px}
+  .lecturer-image img{position:absolute;height:100%;object-fit:cover;object-position:63% center}
+  .lecturer-profile{padding:300px 32px 32px}
+  .lecturer-copy{padding:32px}
 }
 @media(max-width:640px){
-  .lecturer-copy{grid-template-columns:minmax(0,1fr);padding:24px}
-  .productivity-model{margin-top:28px;max-width:330px}
-  .lecturer-copy h3{font-size:30px}
+  .hero-arrival-note{font-size:12px;margin-top:16px}
+  .hero-arrival-note>span{display:block;margin-bottom:4px}
+  .lecturer-image{min-height:600px}
+  .lecturer-profile{padding:290px 24px 28px}
+  .lecturer-profile h3{font-size:34px}
+  .lecturer-roles,.lecturer-intro{font-size:14px}
+  .lecturer-intro{margin-top:18px;padding-top:16px}
+  .lecturer-copy{padding:26px 20px;gap:24px}
+  .productivity-model{max-width:350px;margin-top:0}
+  .productivity-model figcaption{font-size:16px}
+  .model-stage{padding-inline:8px}
+  .model-level strong{font-size:16px}
+  .level-1 strong{font-size:13px}
+  .model-level span{font-size:11px}
+  .lecturer-stats strong{font-size:30px}
 }
 @media(max-width:350px){
-  .lecturer-copy{padding:20px}
-  .model-level strong{font-size:14px}
+  .lecturer-profile{padding:290px 20px 24px}
+  .lecturer-profile h3{font-size:32px}
+  .lecturer-copy{padding-inline:16px}
+  .model-level strong{font-size:15px}
   .level-1 strong{font-size:12px}
-  .model-level span{font-size:9px}
+  .model-level span{font-size:10.5px}
+  .lecturer-stats strong{font-size:26px}
+  .lecturer-stats span{font-size:10px}
 }
 
 /* Shenzhen arrival distinction is information, not a map of guessed entrances. */
