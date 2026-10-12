@@ -9,6 +9,26 @@
     const url = window.COURSE_LINKS?.[link.dataset.link];
     if (url) link.href = url;
   });
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  Object.entries(window.COURSE_MAP_TARGETS || {}).forEach(([key, destination]) => {
+    // Desktop goes straight to Amap's desktop route page. Mobile (including
+    // WeChat) retains the direct mobile route page; no timed app/fallback loop.
+    if (!isIOS && !isAndroid) {
+      const route = new URL('https://ditu.amap.com/dir');
+      route.search = new URLSearchParams({type:'car',policy:'1','to[lnglat]':`${destination.lon},${destination.lat}`,'to[name]':destination.name,src:'yixinhui',callnative:'0',innersrc:'uriapi'});
+      document.querySelectorAll(`[data-link="${key}Navigation"]`).forEach(link => { link.href = route.href; });
+    }
+    // Native navigation is an explicit, user-clicked alternative. WeChat may
+    // block custom schemes; do not claim success or redirect again on a timer.
+    if (isIOS || isAndroid) {
+      const params = new URLSearchParams({sourceApplication:'yixinhui',poiname:destination.name,poiid:destination.poi,lat:destination.lat,lon:destination.lon,dev:'0',style:'0'});
+      document.querySelectorAll(`[data-link="${key}App"]`).forEach(link => {
+        link.href = `${isIOS ? 'iosamap' : 'androidamap'}://navi?${params}`;
+      });
+    }
+  });
   const toast = document.getElementById('toast');
   let toastTimer;
   function announce(message) {
